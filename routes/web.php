@@ -1,7 +1,9 @@
+
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +21,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// ROUTES ADMIN
+Route::middleware('auth', 'verified') // PER GLI UTENTI LOGGATI & VERIFICATI
+    ->name('admin.') // NOME DELLE ROTTE INIZIA CON 'admin.'
+    ->prefix('admin') // PREFIX DEGLI URL INIZIANO CON '/admin/'
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
+    });
 
-Route::resource('projects', ProjectController::class);
+
+/* Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
