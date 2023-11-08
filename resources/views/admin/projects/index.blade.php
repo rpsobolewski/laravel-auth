@@ -43,8 +43,8 @@
 
                     <td class="align-middle">
                         {{-- I PROGETTI SONO COLLEGATI TRAMITE LO SLUG --}}
-                        <a href="{{ route('admin.projects.show', $project->slug) }}">Details</a>
-                        <a href="{{ route('admin.projects.edit', $project->slug) }}">Edit</a>
+                        <a type="button" class="btn btn-primary" href="{{ route('admin.projects.show', $project->slug) }}">Details</a>
+                        <a type="button" class="btn btn-primary" href="{{ route('admin.projects.edit', $project->slug) }}">Edit</a>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{ $project->id }}">
                             Delete

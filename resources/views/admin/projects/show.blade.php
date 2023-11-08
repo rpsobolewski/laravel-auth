@@ -33,7 +33,7 @@
 
                 <div class="card-body">
                     <p><strong>Description: </strong>{{ $project->description }}</p>
-                    <p><strong>Technologies used: </strong>{{ $project->tech }}</p>
+
 
                 </div>
             </div>
