@@ -33,11 +33,9 @@
                 <tr class="">
                     <td class="align-middle" scope="row">{{ $project->id }}</td>
 
-                    @if (str_contains($project->thumb, 'http'))
+
                     <td class="text-center align-middle"><img class="img-fluid" style="height: 100px" src="{{ $project->thumb }}" alt="{{ $project->title }}"></td>
-                    @else
-                    <td class="text-center align-middle"><img class="img-fluid" style="height: 100px" src="{{ asset('storage/' . $project->thumb) }}"></td>
-                    @endif
+
 
 
                     <td class="align-middle">{{ $project->title }}</td>
