@@ -39,21 +39,16 @@ class ProjectController extends Controller
     {
 
 
-        $data = $request->all();
-        $newProject = new Project();
+        $valData = $request->validated();
+
+        $valData['slug'] = Str::slug($request->title, '-');
 
         if ($request->has('thumb')) {
-
             $file_path = Storage::put('projectImages', $request->thumb);
-
-
-            $newProject->thumb = $file_path;
+            $valData['thumb'] = $file_path;
         }
-        $newProject->title = $data['title'];
-        $newProject->slug = Str::slug($request->title, '-');
 
-
-        $newProject->save();
+        $newProject = Project::create($valData);
 
         return to_route('admin.projects.index')->with('status', 'Well Done, New Entry Added Succeffully');
     }
@@ -79,22 +74,26 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->all();
+        $valData = $request->validated();
+
+        $valData['slug'] = Str::slug($request->title, '-');
+
+        if ($request->has('thumb')) {
 
 
-        if ($request->has('thumb') && $project->thumb) {
+            $newThumb = $request->thumb;
+            $path = Storage::put('projectImages', $newThumb);
+
+            if (!isNull($project->thumb) && Storage::fileExists($project->thumb)) {
+
+                Storage::delete($project->thumb);
+            }
 
 
-            Storage::delete($project->thumb);
-
-
-            $newCover = $request->thumb;
-            $path = Storage::put('projectsImages', $newCover);
-            $data['thumb'] = $path;
+            $valData['thumb'] = $path;
         }
 
-
-        $project->update($data);
+        $project->update($valData);
         return to_route('admin.projects.show', $project->slug)->with('status', 'Well Done, Element Edited Succeffully');
     }
 

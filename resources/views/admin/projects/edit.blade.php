@@ -59,11 +59,9 @@
 
                     <div class="mb-3">
 
-                        @if (str_contains($project->thumb, 'http'))
+
                         <td><img class=" img-fluid" style="height: 100px" src="{{ $project->thumb }}" alt="{{ $project->title }}"></td>
-                        @else
-                        <td><img class=" img-fluid" style="height: 100px" src="{{ asset('storage/' . $project->thumb) }}"></td>
-                        @endif
+
 
                     </div>
 

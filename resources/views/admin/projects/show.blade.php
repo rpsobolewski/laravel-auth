@@ -25,11 +25,9 @@
                     <h5>{{ $project->title }}</h5>
                 </div>
 
-                @if (str_contains($project->thumb, 'http'))
+
                 <img class="img-fluid" style="height: 400px" src="{{ $project->thumb }}" alt="{{ $project->title }}">
-                @else
-                <img class="img-fluid" style="height: 400px" src="{{ asset('storage/' . $project->thumb) }}">
-                @endif
+
 
                 <div class="card-body">
                     <p><strong>Description: </strong>{{ $project->description }}</p>
@@ -37,6 +35,8 @@
 
                 </div>
             </div>
+            <a type="button" class="btn btn-primary mt-1" href="{{ route('admin.projects.edit', $project->slug) }}">Edit</a>
+            @include('partials.delete')
         </div>
     </div>
 
