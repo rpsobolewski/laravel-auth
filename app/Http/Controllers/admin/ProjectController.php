@@ -79,16 +79,13 @@ class ProjectController extends Controller
         $valData['slug'] = Str::slug($request->title, '-');
 
         if ($request->has('thumb')) {
-
-
-            $newThumb = $request->thumb;
-            $path = Storage::put('projectImages', $newThumb);
-
             if (!isNull($project->thumb) && Storage::fileExists($project->thumb)) {
 
                 Storage::delete($project->thumb);
             }
 
+            $newThumb = $request->thumb;
+            $path = Storage::put('projectImages', $newThumb);
 
             $valData['thumb'] = $path;
         }
@@ -102,7 +99,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if (!is_null($project->thumb)) {
+        /*   dump(str_replace('http://127.0.0.1:8000', '', $project->thumb));
+        dd(Storage::disk('public')->fileExists(str_replace('http://127.0.0.1:8000', '', $project->thumb))); */
+        if (Storage::exists($project->thumb)) {
+            dd($project);
             Storage::delete($project->thumb);
         }
 
@@ -110,8 +110,8 @@ class ProjectController extends Controller
         $project->delete();
 
 
-        $projects = Project::all();
 
-        return view('admin.projects.index', ['projects' => $projects])->with('message', 'Well Done, Element Deleted Succeffully');
+
+        return to_route('admin.projects.index')->with('message', 'Well Done, Element Deleted Succeffully');
     }
 }

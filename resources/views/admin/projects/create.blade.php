@@ -48,6 +48,30 @@
 
                 </div>
 
+                <div class="mb-3">
+
+                    <label for="description" class="form-label"><strong>Project Link</strong></label>
+
+                    <input type="text" class="form-control" name="link_project" id="link_project" aria-describedby="helpTitle" placeholder="New project link">
+
+                    @error('description')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label for="description" class="form-label"><strong>Github Link</strong></label>
+
+                    <input type="text" class="form-control" name="link_github" id="link_github" aria-describedby="helpTitle" placeholder="New project Github link">
+
+                    @error('description')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
+                </div>
+
 
 
                 <div class="mb-3">

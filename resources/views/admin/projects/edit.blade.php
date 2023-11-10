@@ -53,6 +53,30 @@
 
                 </div>
 
+                <div class="mb-3">
+
+                    <label for="description" class="form-label"><strong>Project Link</strong></label>
+
+                    <input type="text" class="form-control" name="link_project" id="link_project" aria-describedby="helpTitle" value="{{ old('link_project') ? old('link_project') : $project->link_project }}">
+
+                    @error('description')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label for="description" class="form-label"><strong>Github Link</strong></label>
+
+                    <input type="text" class="form-control" name="link_github" id="link_github" aria-describedby="helpTitle" value="{{ old('link_github') ? old('link_github') : $project->link_github }}">
+
+                    @error('description')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+
+                </div>
+
 
 
                 <div class="mb-3">
